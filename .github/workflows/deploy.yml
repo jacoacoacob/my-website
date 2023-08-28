@@ -5,7 +5,7 @@ on:
     branches: [gh-pages]
 
 env:
-  BUILD_FOLDER: .output/public # or .output/public/yourrepositoryname/
+  BUILD_FOLDER: .output/public/my-website # or .output/public/yourrepositoryname/
   jobs:
     build:
       runs-on: ubuntu-latest
