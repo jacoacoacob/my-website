@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { WorkContent } from '~/types/work-content';
+import type { WorkContent } from "~/types/work-content";
 
 const props = defineProps<{
     content: WorkContent

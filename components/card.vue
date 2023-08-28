@@ -1,7 +1,8 @@
 <template>
     <div
         class="
-            relative p-6 border-2 bg-white rounded
+            relative p-6 border bg-white rounded-sm
+            border-slate-500
             dark:bg-zinc-900 dark:border-gray-700 
         "
     >
