@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages on merge
 'on':
   push:
     branches:
-      - gh-pages
+      - main
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
