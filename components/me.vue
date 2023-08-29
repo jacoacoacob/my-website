@@ -28,10 +28,10 @@ const {
                 class: 'rounded max-h-44 sm:max-h-64'
             }"
         />
-        <div class="space-y-6 dark:text-slate-200">
-            <ul class="font-bold space-y-2">
+        <div class="space-y-6">
+            <ul class="font-bold space-y-3 dark:text-slate-200">
                 <li v-for="username in github" :key="username">
-                    <ExternalLink :href="`https://github.com/${username}`">
+                    <ExternalLink :href="`https://github.com/${username}`" >
                       <IconGithub /> {{ username }}
                     </ExternalLink>
                 </li>
@@ -55,7 +55,7 @@ const {
                     class: 'rounded max-h-40'
                 }"
             />
-            <ul class="font-bold space-y-2 self-center">
+            <ul class="font-bold space-y-3 self-center dark:text-slate-200">
                 <li v-for="username in github" :key="username">
                     <ExternalLink :href="`https://github.com/${username}`">
                       <IconGithub /> {{ username }}

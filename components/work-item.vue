@@ -14,7 +14,7 @@ const {
         employmentType,
         years,
         body,
-        _draft
+        _draft,
     }
 } = props;
 

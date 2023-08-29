@@ -10,7 +10,7 @@ const {
         title,
         years,
         githubUrl,
-        homePageUrl,
+        homepageUrl,
         body,
         _draft
     }
@@ -32,14 +32,14 @@ const {
                         {{ years }}
                     </div>
                 </div>
-                <ul v-if="githubUrl || homePageUrl" class="list-none p-0 -m-1 text-sm">
+                <ul v-if="githubUrl || homepageUrl" class="list-none p-0 -m-1 text-sm">
                     <li>
                         <ExternalLink v-if="githubUrl" :href="githubUrl" class="no-underline font-semibold">
                             <IconGithub class="h-5 w-5" /> <span>Repository</span>
                         </ExternalLink>
                     </li>
                     <li>
-                        <ExternalLink v-if="homePageUrl" :href="homePageUrl" class="no-underline font-semibold">
+                        <ExternalLink v-if="homepageUrl" :href="homepageUrl" class="no-underline font-semibold">
                             <IconHome /> Homepage
                         </ExternalLink>
                     </li>
