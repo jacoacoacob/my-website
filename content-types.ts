@@ -18,7 +18,8 @@ interface WorkContent extends ParsedContent {
 }
 
 interface MeContent extends ParsedContent {
-    linkedIn: string;
+    linkedInName: string;
+    linkedInUrl: string;
     image: string;
     github: string[];
 }

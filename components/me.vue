@@ -8,25 +8,25 @@ const props = defineProps<{
 const {
     content: {
         github,
-        linkedIn,
+        linkedInName,
+        linkedInUrl,
         image,
-        body
+        body,
     },
 } = props;
 </script>
 
 <template>
     <div class="
-        space-y-6
-        sm:flex sm:space-x-6 
+        hidden
+        sm:flex sm:space-x-6 sm:space-y-6
         lg:block lg:space-x-0
     ">
         <NuxtPicture
             :src="image"
             :imgAttrs="{
-                class: 'rounded max-h-64'
+                class: 'rounded max-h-44 sm:max-h-64'
             }"
-            class="max-h-"
         />
         <div class="space-y-6 dark:text-slate-200">
             <ul class="font-bold space-y-2">
@@ -36,8 +36,8 @@ const {
                     </ExternalLink>
                 </li>
                 <li>
-                    <ExternalLink :href="linkedIn">
-                        <IconLinkedin /> Jacob Albright
+                    <ExternalLink :href="linkedInUrl">
+                        <IconLinkedin /> {{ linkedInName }}
                     </ExternalLink>
                 </li>
             </ul>
@@ -46,5 +46,31 @@ const {
                 :value="body"
             />
         </div>
+    </div>
+    <div class="space-y-6 sm:hidden">
+        <div class="flex space-x-4">
+            <NuxtPicture
+                :src="image"
+                :imgAttrs="{
+                    class: 'rounded max-h-40'
+                }"
+            />
+            <ul class="font-bold space-y-2 self-center">
+                <li v-for="username in github" :key="username">
+                    <ExternalLink :href="`https://github.com/${username}`">
+                      <IconGithub /> {{ username }}
+                    </ExternalLink>
+                </li>
+                <li>
+                    <ExternalLink :href="linkedInUrl">
+                        <IconLinkedin /> {{ linkedInName }}
+                    </ExternalLink>
+                </li>
+            </ul>
+        </div>
+        <ContentRendererMarkdown
+                class="prose dark:prose-invert max-w-sm"
+                :value="body"
+            />
     </div>
 </template>

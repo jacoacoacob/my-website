@@ -1,5 +1,6 @@
 ---
-linkedIn: https://www.linkedin.com/in/jacob-albright-6b810815b/
+linkedInName: Jacob Albright
+linkedInUrl: https://www.linkedin.com/in/jacob-albright-6b810815b/
 image: the-squirrel.png
 github:
     - jacoacoacob

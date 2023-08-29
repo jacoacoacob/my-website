@@ -4,11 +4,10 @@ import type { MeContent, WorkContent, PersonalProjectContent } from "~/content-t
 
 <template>
     <main class="
-        flex flex-col items-center py-2 px-4
-        sm:space-y-6
+        flex flex-col items-center px-4 space-y-6
         lg:flex-row lg:justify-center lg:items-start lg:space-y-0 lg:space-x-6
     ">
-        <div class="pt-6 lg:sticky lg:top-2">
+        <div class="pt-4 lg:sticky lg:top-2">
             <ContentQuery path="/_me" find="one" v-slot="{ data }: { data: MeContent }">
                 <Me :content="data" />
             </ContentQuery>
