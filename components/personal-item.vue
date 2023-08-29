@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { PersonalProjectContent } from '~/types/personal-project-content';
+import { PersonalProjectContent } from '~/content-types';
 
 const props = defineProps<{
     content: PersonalProjectContent
@@ -19,16 +19,16 @@ const {
 
 <template>
     <li v-if="!_draft">
-        <Card kind="personal project">
-            <div class="font-mono space-y-3">
+        <Card>
+            <div class="font-mono space-y-3 dark:text-slate-200 ">
                 <div class="space-y-1">
                     <div class="flex items-center justify-between">
-                        <h2 class="my-0">
+                        <h2 class="my-0 dark:text-slate-200 ">
                             {{ title }}
                         </h2>
                         <Badge>PERSONAL PROJECT</Badge>
                     </div>
-                    <div class="text-slate-500 text-sm font-semibold">
+                    <div class="text-slate-500 dark:text-slate-400 text-sm font-semibold">
                         {{ years }}
                     </div>
                 </div>
