@@ -42,9 +42,9 @@ const {
                         {{ company }}
                     </span>
                     <span>•</span>
-                    <span class="text-black">{{ employmentType }}</span>
+                    <span>{{ employmentType }}</span>
                 </div>
-                <div class="text-slate-500 text-sm font-semibold flex space-x-3">
+                <div class="text-slate-500 dark:text-slate-400 text-sm font-semibold flex space-x-3">
                     <span>{{ years }}</span>
                     <span>•</span>
                     <span>{{ location }}</span>

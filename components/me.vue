@@ -28,7 +28,7 @@ const {
             }"
             class="max-h-"
         />
-        <div class="space-y-6">
+        <div class="space-y-6 dark:text-slate-200">
             <ul class="font-bold space-y-2">
                 <li v-for="username in github" :key="username">
                     <ExternalLink :href="`https://github.com/${username}`">
@@ -42,7 +42,7 @@ const {
                 </li>
             </ul>
             <ContentRendererMarkdown
-                class="prose max-w-sm"
+                class="prose dark:prose-invert max-w-sm"
                 :value="body"
             />
         </div>

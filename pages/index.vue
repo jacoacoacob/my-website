@@ -4,15 +4,16 @@ import type { MeContent, WorkContent, PersonalProjectContent } from "~/content-t
 
 <template>
     <main class="
-        flex flex-col items-center space-x-6 py-2 px-4
-        lg:flex-row lg:justify-center lg:items-start
+        flex flex-col items-center  space-x-6 py-2 px-4
+        sm:space-y-6
+        lg:flex-row lg:justify-center lg:items-start lg:space-y-0
     ">
-        <div class=" pt-6 lg:sticky lg:top-2">
+        <div class="pt-6 lg:sticky lg:top-2">
             <ContentQuery path="/_me" find="one" v-slot="{ data }: { data: MeContent }">
                 <Me :content="data" />
             </ContentQuery>
         </div>
-        <div class="prose w-full">
+        <div class="prose dark:prose-invert w-full m-0">
             <ContentList path="/_work" v-slot="{ list }">
                 <ul class="space-y-4 p-0 list-none">
                     <WorkItem
