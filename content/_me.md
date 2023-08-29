@@ -5,4 +5,4 @@ github:
     - jacoacoacob
     - jaco26
 ---
-I am an enthusiastic programmer with lots of curiosity and a thousands of hours of experience 😀🧑🏻‍💻👍🏻 [hi](/blog)
+I am an enthusiastic programmer with lots of curiosity and a thousands of hours of experience 😀🧑🏻‍💻👍🏻
