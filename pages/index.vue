@@ -1,40 +1,85 @@
 <script setup lang="ts">
-import ogImageUrl from "~/public/the-squirrel.png";
+import theSquirrelImgUrl from "~/public/the-squirrel.png";
 import type { MeContent, WorkContent, PersonalProjectContent } from "~/content-types";
 
-const title = "Jacob Albright - Software Engineer"
+const { public: { domain } } = useRuntimeConfig();
+
+const title = "Jacob Albright - Software Engineer";
 const description = "Hello, you can call me Jacob Albright. I am a Madison, WI based software engineer and this is a collection of some of projects I've worked on over the years.";
 
-useHead({
+useServerSeoMeta({
     title,
-    meta: [
-        {
-            name: "description",
-            content: description
-        },
-        {
-            property: "og:title",
-            content: title
-        },
-        {
-            property: "og:type",
-            content: "website",
-        },
-        {
-            property: "og:description",
-            content: description,
-        },
-        {
-            property: "og:site:name",
-            content: "Jacob Albright",
-        },
-        {
-            property: "og:image",
-            content: ogImageUrl
-        }
-
-    ]
+    description,
+    ogUrl: `https://${domain}`,
+    ogTitle: title,
+    ogDescription: description,
+    ogType: "website",
+    ogImage: theSquirrelImgUrl,
+    ogImageHeight: 400,
+    twitterCard: "summary_large_image",
+    twitterTitle: title,
+    twitterImage: theSquirrelImgUrl,
+    twitterImageHeight: 400,
 });
+
+// useHead({
+//     title,
+//     meta: [
+//         {
+//             name: "description",
+//             content: description
+//         },
+//         {
+//             name: "twitter:card",
+//             content: "summary_large_image",
+//         },
+//         {
+//             name: "twitter:title",
+//             content: title,
+//         },
+//         {
+//             name: "twitter:description",
+//             content: description,
+//         },
+//         {
+//             name: "twitter:image",
+//             content: theSquirrelImgUrl,
+//         },
+//         {
+//             property: "twitter:domain",
+//             content: domain,
+//         },
+//         {
+//             property: "twitter:url",
+//             content: `https://${domain}`,
+//         },
+//         {
+//             property: "og:url",
+//             content: `https://${domain}`,
+//         },
+//         {
+//             property: "og:title",
+//             content: title
+//         },
+//         {
+//             property: "og:type",
+//             content: "website",
+//         },
+//         {
+//             property: "og:description",
+//             content: description,
+//         },
+//         {
+//             property: "og:image",
+//             content: theSquirrelImgUrl
+//         },
+//         {
+//             property: "og:image:height",
+//             content: "300",
+//         }
+
+//     ]
+// });
 </script> 
 
 <template>
