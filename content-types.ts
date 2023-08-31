@@ -5,6 +5,7 @@ interface PersonalProjectContent extends ParsedContent {
     years: string;
     homepageUrl?: string;
     githubUrl?: string;
+    skills?: string[];
 }
 
 interface WorkContent extends ParsedContent {
@@ -15,6 +16,7 @@ interface WorkContent extends ParsedContent {
     location: string;
     years: string;
     description?: string[];
+    skills?: string[];
 }
 
 interface MeContent extends ParsedContent {

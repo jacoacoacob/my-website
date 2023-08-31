@@ -42,7 +42,7 @@ const {
                 </li>
             </ul>
             <ContentRendererMarkdown
-                class="prose dark:prose-invert max-w-sm"
+                class="prose dark:prose-invert max-w-xs"
                 :value="body"
             />
         </div>

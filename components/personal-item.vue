@@ -11,6 +11,7 @@ const {
         years,
         githubUrl,
         homepageUrl,
+        skills,
         body,
         _draft
     }
@@ -47,6 +48,13 @@ const {
             </div>
             <div>
                 <ContentRendererMarkdown :value="body" />
+            </div>
+            <div v-if="skills">
+                <ul class="flex flex-wrap space-x-2 list-none">
+                    <li class="badge" v-for="skill in skills">
+                        {{ skill }}
+                    </li>
+                </ul>
             </div>
         </Card>
     </li>
