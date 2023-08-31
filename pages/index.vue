@@ -16,70 +16,13 @@ useServerSeoMeta({
     ogType: "website",
     ogImage: theSquirrelImgUrl,
     ogImageHeight: 400,
+    ogImageWidth: 400,
     twitterCard: "summary_large_image",
     twitterTitle: title,
     twitterImage: theSquirrelImgUrl,
     twitterImageHeight: 400,
+    twitterImageWidth: 400,
 });
-
-// useHead({
-//     title,
-//     meta: [
-//         {
-//             name: "description",
-//             content: description
-//         },
-//         {
-//             name: "twitter:card",
-//             content: "summary_large_image",
-//         },
-//         {
-//             name: "twitter:title",
-//             content: title,
-//         },
-//         {
-//             name: "twitter:description",
-//             content: description,
-//         },
-//         {
-//             name: "twitter:image",
-//             content: theSquirrelImgUrl,
-//         },
-//         {
-//             property: "twitter:domain",
-//             content: domain,
-//         },
-//         {
-//             property: "twitter:url",
-//             content: `https://${domain}`,
-//         },
-//         {
-//             property: "og:url",
-//             content: `https://${domain}`,
-//         },
-//         {
-//             property: "og:title",
-//             content: title
-//         },
-//         {
-//             property: "og:type",
-//             content: "website",
-//         },
-//         {
-//             property: "og:description",
-//             content: description,
-//         },
-//         {
-//             property: "og:image",
-//             content: theSquirrelImgUrl
-//         },
-//         {
-//             property: "og:image:height",
-//             content: "300",
-//         }
-
-//     ]
-// });
 </script> 
 
 <template>
