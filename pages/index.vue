@@ -1,5 +1,40 @@
 <script setup lang="ts">
+import ogImageUrl from "~/public/the-squirrel.png";
 import type { MeContent, WorkContent, PersonalProjectContent } from "~/content-types";
+
+const title = "Jacob Albright - Software Engineer"
+const description = "Hello, you can call me Jacob Albright. I am a Madison, WI based software engineer and this is a collection of some of projects I've worked on over the years.";
+
+useHead({
+    title,
+    meta: [
+        {
+            name: "description",
+            content: description
+        },
+        {
+            property: "og:title",
+            content: title
+        },
+        {
+            property: "og:type",
+            content: "website",
+        },
+        {
+            property: "og:description",
+            content: description,
+        },
+        {
+            property: "og:site:name",
+            content: "Jacob Albright",
+        },
+        {
+            property: "og:image",
+            content: ogImageUrl
+        }
+
+    ]
+});
 </script> 
 
 <template>
