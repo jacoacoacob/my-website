@@ -19,6 +19,10 @@ const {
     }
 } = props;
 
+const isHovered = ref(false);
+
+const anchorHash = slugify(`${position} at ${company}`);
+
 </script>
 
 <template>
@@ -30,9 +34,18 @@ const {
             </div>
             <div class="font-mono space-y-1" aria-hidden>
                 <div class="flex items-center justify-between">
-                    <h2 class="my-0">
-                         {{ position }}
-                    </h2>
+                    <div
+                        class="flex items-center space-x-3 flex-1"
+                        @mouseenter="isHovered = true"
+                        @mouseleave="isHovered = false"
+                    >
+                        <h2 class="my-0 scroll-mt-[72px]" :id="anchorHash">
+                             {{ position }}
+                        </h2>
+                        <a v-if="isHovered" :href="'#' + anchorHash">
+                            <IconLink class="h-7 w-7" />
+                        </a>
+                    </div>
                     <span class="badge text-white bg-black font-mono">
                         Work
                     </span>
