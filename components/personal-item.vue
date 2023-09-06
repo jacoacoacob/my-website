@@ -8,6 +8,7 @@ const props = defineProps<{
 const {
     content: {
         title,
+        collaborative,
         years,
         githubUrl,
         homepageUrl,
@@ -23,11 +24,13 @@ const {
         <Card>
             <div class="font-mono space-y-3 dark:text-slate-200 ">
                 <div class="space-y-1">
-                    <div class="flex items-center justify-between">
+                    <div class="flex items-center justify-between space-x-1">
                         <h2 class="my-0 dark:text-slate-200 ">
                             {{ title }}
                         </h2>
-                        <Badge>PERSONAL PROJECT</Badge>
+                        <span class="badge text-white bg-black font-mono">
+                            Personal{{ collaborative ? "/Collaborative" : "" }}
+                        </span>
                     </div>
                     <div class="text-slate-500 dark:text-slate-400 text-sm font-semibold">
                         {{ years }}

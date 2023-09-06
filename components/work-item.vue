@@ -33,7 +33,9 @@ const {
                     <h2 class="my-0">
                          {{ position }}
                     </h2>
-                    <Badge>WORK</Badge>
+                    <span class="badge text-white bg-black font-mono">
+                        Work
+                    </span>
                 </div>
                 <div class="flex items-center space-x-2">
                     <ExternalLink v-if="companyLinkedIn" :href="companyLinkedIn">

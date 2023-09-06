@@ -2,6 +2,7 @@ import type { ParsedContent } from "@nuxt/content/dist/runtime/types";
 
 interface PersonalProjectContent extends ParsedContent {
     title: string;
+    collaborative: boolean;
     years: string;
     homepageUrl?: string;
     githubUrl?: string;
