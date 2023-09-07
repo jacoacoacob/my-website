@@ -33,7 +33,6 @@ const isHovered = ref(false);
                             @mouseenter="isHovered = true"
                             @mouseleave="isHovered = false"
                         >
-                            <!-- <h2 class="my-0 scroll-mt-10 sm:scroll-mt-11 dark:text-slate-200" :id="slugify(title)"> -->
                             <h2 class="my-0 scroll-mt-[72px] dark:text-slate-200" :id="slugify(title)">
                                 {{ title }}
                             </h2>
