@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import theSquirrelImgUrl from "~/public/the-squirrel.png";
+import imageUrl from "~/public/me.jpg";
 
 const { public: { domain } } = useRuntimeConfig();
 
@@ -13,12 +13,12 @@ useServerSeoMeta({
     ogTitle: title,
     ogDescription: description,
     ogType: "website",
-    ogImage: theSquirrelImgUrl,
+    ogImage: imageUrl,
     ogImageHeight: 400,
     ogImageWidth: 400,
     twitterCard: "summary_large_image",
     twitterTitle: title,
-    twitterImage: theSquirrelImgUrl,
+    twitterImage: imageUrl,
     twitterImageHeight: 400,
     twitterImageWidth: 400,
 });
