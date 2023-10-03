@@ -1,7 +1,7 @@
 ---
 linkedInName: Jacob Albright
 linkedInUrl: https://www.linkedin.com/in/jacob-albright-6b810815b/
-image: the-squirrel.png
+image: me.jpg
 github:
     - jacoacoacob
     - jaco26
