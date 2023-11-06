@@ -16,7 +16,6 @@ const filterProjectKind = inject<Ref<ProjectKind[]>>("filterProjectKind")!;
             </ContentQuery>
         </div>
         <div class="space-y-10">
-            <!-- <ControlBar /> -->
             <div
                 class="
                     prose prose-sm prose-li:p-0 prose-headings:my-0 prose-ul:p-0
