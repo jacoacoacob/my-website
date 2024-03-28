@@ -11,7 +11,6 @@ const {
         location,
         company,
         companyLinkedIn,
-        employmentType,
         years,
         body,
         skills,
@@ -57,8 +56,6 @@ const anchorHash = slugify(`${position} at ${company}`);
                     <span v-else>
                         {{ company }}
                     </span>
-                    <span>•</span>
-                    <span>{{ employmentType }}</span>
                 </div>
                 <div class="text-slate-500 dark:text-slate-400 text-sm font-semibold flex space-x-3">
                     <span>{{ years }}</span>
