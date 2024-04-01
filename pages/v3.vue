@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import type { MeContent, WorkContent, PersonalProjectContent } from "../content-types";
 
-function onWindowScroll() {
-  
-}
+const {  } = usePanelScroll(window);
+
 
 onMounted(() => {
 
