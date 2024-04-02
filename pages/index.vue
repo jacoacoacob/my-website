@@ -89,11 +89,25 @@ onMounted(() => {
 
 <template>
   <div class="prose dark:prose-invert">
-    <HomePageHeader :activeSection="activeSection" class="hidden lg:block" />
+    <HomePageHeader :activeSection="(activeSection as any)" class="hidden lg:block" />
     <TransitionGroup name="breadcrumbs">
       <div class="lg:hidden sticky top-0 z-10" key="header">
-        <HomePageHeader v-if="showBreadcrumbHeader" :activeSection="activeSection" />
+        <HomePageHeader v-if="showBreadcrumbHeader" :activeSection="(activeSection as any)" />
       </div>
+      <section ref="workSection" key="work">
+        <h2>Work</h2>
+        <ContentList :query="{ path: '/_work' }">
+          <template #="{ list }: { list: WorkContent[] }">
+            <ul class="space-y-6 p-0 list-none">
+              <WorkItem
+                v-for="content in list"
+                :key="content._id"
+                :content="content"
+              />
+            </ul>
+          </template>
+        </ContentList>
+      </section>
       <section ref="projectsSection" key="projects">
         <h2>Projects</h2>
         <ContentList :query="{ path: '/_personal' }">
@@ -107,20 +121,6 @@ onMounted(() => {
             </ul>
           </template>
           <template #not-found></template>
-        </ContentList>
-      </section>
-      <section ref="workSection" key="work">
-        <h2>Work</h2>
-        <ContentList :query="{ path: '/_work' }">
-          <template #="{ list }: { list: WorkContent[] }">
-            <ul class="space-y-6 p-0 list-none">
-              <WorkItem
-                v-for="content in list"
-                :key="content._id"
-                :content="content"
-              />
-            </ul>
-          </template>
         </ContentList>
       </section>
     </TransitionGroup>
