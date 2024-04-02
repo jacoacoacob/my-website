@@ -4,7 +4,7 @@ defineProps<{ activeSection?: "Projects" | "Work" }>();
 </script>
 
 <template>
-  <header class="sticky left-0 top-0 -mx-2 px-2 pt-2 bg-white dark:bg-slate-950 z-10">
+  <header class="sticky left-0 top-0 -mx-2 px-2 pt-2 bg-white dark:bg-slate-950 z-10" data-bug-box>
     <div class="border-b border-slate-400 dark:border-slate-700 font-mono flex justify-between">
       <div>
         <h1 class="text-lg m-0">Jacob Albright</h1>
