@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { WorkContent, PersonalProjectContent } from "../content-types";
+
 import imageUrl from "~/public/me.jpg";
 
 const { public: { domain } } = useRuntimeConfig();
@@ -22,10 +24,44 @@ useServerSeoMeta({
     twitterImageHeight: 400,
     twitterImageWidth: 400,
 });
-</script> 
+
+</script>
 
 <template>
-    <HomePageContentProvider>
-        <HomePageContent />
-    </HomePageContentProvider>
+  <div class="prose dark:prose-invert">
+    <header class="sticky left-0 top-0 -mx-2 px-2  bg-white dark:bg-slate-950 z-10">
+      <div class="border-b border-slate-400 dark:border-slate-700 py-4">
+        <h1 class="my-0">Experience</h1>
+      </div>
+    </header>
+    <section>
+      <h2>Work</h2>
+      <ContentList :query="{ path: '/_work' }">
+        <template #="{ list }: { list: WorkContent[] }">
+          <ul class="space-y-6 p-0 list-none">
+            <WorkItem
+              v-for="content in list"
+              :key="content._id"
+              :content="content"
+            />
+          </ul>
+        </template>
+      </ContentList>
+    </section>
+    <section>
+      <h2>Projects</h2>
+      <ContentList :query="{ path: '/_personal' }">
+        <template #default="{ list }: { list: PersonalProjectContent[] }">
+          <ul class="space-y-6 p-0 list-none">
+            <ProjectItem
+              v-for="content in list"
+              :key="content._id"
+              :content="content"
+            />
+          </ul>
+        </template>
+        <template #not-found></template>
+      </ContentList>
+    </section>
+  </div>
 </template>

@@ -4,10 +4,6 @@
 
 @layer components {
     .badge {
-        @apply inline rounded-sm !px-2 !py-1 text-xs font-semibold font-sans
-        bg-white
-        dark:bg-slate-700
-        /* bg-slate-200
-        dark:bg-slate-700 */
+        @apply inline rounded-sm !px-2 !py-1 text-xs font-semibold font-sans;
     }
 }

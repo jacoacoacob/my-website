@@ -3,14 +3,15 @@
 type ParentElement = Window | Element;
 
 function preventDefault(ev: Event) {
+  console.log("[preventDefault]", ev.type);
   ev.preventDefault();
 }
 
 const SCROLL_KEYS = [
-  "KeyLeft",
-  "KeyUp",
-  "KeyRight",
-  "KeyDown",
+  "ArrowLeft",
+  "ArrowUp",
+  "ArrowRight",
+  "ArrowDown",
   "Space",
   "Home",
   "PageDown",
@@ -19,6 +20,7 @@ const SCROLL_KEYS = [
 
 function preventDefaultForScrollKeys(ev: KeyboardEvent) {
   if (SCROLL_KEYS.includes(ev.code)) {
+    console.log("[preventDefaultForScrollKeys]", ev.type);
     preventDefault(ev);
     return false;
   }
@@ -35,39 +37,84 @@ try {
 
 const wheelOpt = supportsPassive ? { passive: false } : false;
 
-function getWheelEvent() {
-  return "onwheel" in document.createElement("div") ? "wheel" : "mousewheel";
+
+function interruptScroll() {
+  window.addEventListener("wheel", preventDefault, wheelOpt);
+  window.addEventListener("touchmove", preventDefault, wheelOpt);
+
 }
 
-function disableScrollInterrupt(element: ParentElement) {
-  element.addEventListener("DOMMouseScroll", preventDefault, false);
-  element.addEventListener(getWheelEvent(), preventDefault, wheelOpt);
-  element.addEventListener("touchmove", preventDefault, wheelOpt);
-  element.addEventListener("keydown", preventDefaultForScrollKeys as any, false);
+function allowScroll() {
+  window.removeEventListener("wheel", preventDefault, false);
+  window.removeEventListener("touchmove", preventDefault, false);
 }
 
-function enableScrollInterrupt(element: ParentElement) {
-  element.removeEventListener("DOMMouseScroll", preventDefault, false);
-  element.removeEventListener(getWheelEvent(), preventDefault, false);
-  element.removeEventListener("touchmove", preventDefault, false);
-  element.removeEventListener("keydown", preventDefaultForScrollKeys as any, false);
+interface Intersection {
+  elementId: string;
+  ratio: number;
+  distanceToCenter: number;
 }
 
-function findInViewChildren(parent: ParentElement, children: Element[]) {
-        
+function findInViewChildren(children: HTMLElement[]) {
+  return children.reduce((accum: Intersection[], child) => {
+    const rect = child.getBoundingClientRect();
+    const { top, bottom, height } = rect;
+
+    let _amountShown = height;
+
+    if (top <= 0) {
+      _amountShown += top;
+    }
+
+    if (bottom >= window.innerHeight) {
+      _amountShown += window.innerHeight - bottom;
+    }
+
+    const ratio = Math.round((_amountShown / height) * 100) / 100;
+
+    const elementYCenter = top + (height / 2);
+    const windowYCenter = window.scrollY + (window.innerHeight / 2);
+
+    const distanceToCenter = Math.abs(windowYCenter - elementYCenter);
+    
+    if (ratio >= 0) {
+      accum.push({
+        ratio,
+        distanceToCenter,
+        elementId: child.dataset.id as string,
+      });
+    }
+    return accum;
+  }, []);
 }
 
-function usePanelScroll(parent: ParentElement, children: Element[]) {
+function usePanelScroll(items: Ref<HTMLElement[]>) {
 
-  const scrollDirection = ref<"up" | "dwon" | "idle">("idle");
+  const inViewItems = ref(findInViewChildren(items.value));
 
-  let handle: NodeJS.Timeout;
+  function listenForWheelOrSwipe() {
+    window.addEventListener("wheel", onWheelOrSwipe);
+    window.addEventListener("touchmove", preventDefault);
 
-  function onScroll(ev?: Event) {
-    const inView = findInViewChildren(parent, children);
+    allowScroll();
   }
 
-  return { onScroll, scrollDirection };
+  function unlistenForWheelOrSwipe() {
+    window.removeEventListener("wheel", onWheelOrSwipe);
+    window.removeEventListener("touchmove", preventDefault);
+
+    allowScroll();
+  }
+
+  function onWheelOrSwipe(ev?: Event) {
+
+  }
+
+  function onScroll(ev?: Event) {
+    inViewItems.value = findInViewChildren(items.value);
+  }  
+
+  return { onScroll, inViewItems, unlistenForWheelOrSwipe, listenForWheelOrSwipe };
 }
 
 export { usePanelScroll };
