@@ -10,13 +10,19 @@ const {
   teardown: teardownFeatureBug,
 } = useFeatureBug();
 
+const disableFeatureBug = false;
+
 onMounted(() => {
-  setupFeatureBug();
-  animate();
+  if (!disableFeatureBug) {
+    setupFeatureBug();
+    animate();
+  }
 });
 
 onBeforeUnmount(() => {
-  teardownFeatureBug();
+  if (!disableFeatureBug) {
+    teardownFeatureBug();
+  }
 });
 </script>
 

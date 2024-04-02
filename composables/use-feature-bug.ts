@@ -143,6 +143,7 @@ function useFeatureBug() {
     _boxes = Array.from(document.querySelectorAll("[data-bug-box]"));
     _ctx.canvas.height = window.innerHeight;
     _ctx.canvas.width = window.innerWidth;
+    _computeBoundingRects();
   }
 
   function animate() {
@@ -155,9 +156,10 @@ function useFeatureBug() {
   }
 
   function setup() {
+    _boxes = Array.from(document.querySelectorAll("[data-bug-box]"));
+    _rects = _boxes.map((box) => box.getBoundingClientRect());
     _ctx = canvas.value?.getContext("2d") as CanvasRenderingContext2D;
     _onResize();
-    _rects = _boxes.map((box) => box.getBoundingClientRect());
     _onScroll();
     
     window.addEventListener("resize", _onResize);
