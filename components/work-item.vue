@@ -25,7 +25,6 @@ const {
     v-if="!_draft"
     :title="position"
     :slug="slugify(`${position} at ${company}`)"
-    kind="work"
     theme="cyan"
   >
     <div>

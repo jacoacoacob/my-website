@@ -18,7 +18,7 @@ const {
 </script>
 
 <template>
-  <ExperienceListItem v-if="!_draft" :title="title" :slug="slugify(`project-${title}`)" kind="project" theme="fuchsia">
+  <ExperienceListItem v-if="!_draft" :title="title" :slug="slugify(`project-${title}`)" theme="fuchsia">
     <ul v-if="githubUrl || homepageUrl" class="list-none px-0 -m-1 text-sm">
       <li>
         <ExternalLink v-if="githubUrl" :href="githubUrl" class="no-underline font-semibold">

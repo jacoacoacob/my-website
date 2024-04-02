@@ -1,5 +1,6 @@
 <script setup lang="ts">
-defineProps<{ activeSection?: string }>();
+defineProps<{ activeSection?: "Projects" | "Work" }>();
+
 </script>
 
 <template>
@@ -10,9 +11,29 @@ defineProps<{ activeSection?: string }>();
         <ul class="list-none font-bold  text-sm flex items-center gap-2 p-0 -mx-1 my-0">
           <li>Experience</li>
           <li class="text-sm">></li>
-          <li>{{ activeSection }}</li>
+          <li>
+            <Transition name="fade">
+              <span v-if="activeSection === 'Projects'">Projects</span>
+              <span v-else-if="activeSection === 'Work'">Work</span>
+            </Transition>
+          </li>
         </ul>
       </div>
     </div>
   </header>
 </template>
+
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.2s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.fade-leave-active {
+  position: absolute;
+}
+</style>

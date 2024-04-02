@@ -50,7 +50,7 @@ const sections = [["Projects", projectsSection], ["Work", workSection]] as const
 const showBreadcrumbHeader = ref(false);
 
 function onScroll() {
-  showBreadcrumbHeader.value = window.scrollY > 240;
+  showBreadcrumbHeader.value = window.scrollY > 270;
 }
 
 onMounted(() => {
@@ -134,12 +134,9 @@ onMounted(() => {
   transition: all 0.2s ease;
 }
 
-.breadcrumbs-enter-from {
-  transform: translateY(-50px);
-}
-
+.breadcrumbs-enter-from,
 .breadcrumbs-leave-to {
-  transform: translateY(-50px);
+  transform: translateY(-60px);
 }
 
 /* ensure leaving items are taken out of layout flow so that moving
