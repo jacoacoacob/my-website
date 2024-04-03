@@ -10,7 +10,7 @@ const {
   teardown: teardownFeatureBug,
 } = useFeatureBug();
 
-const disableFeatureBug = false;
+const disableFeatureBug = true;
 
 onMounted(() => {
   if (!disableFeatureBug) {
