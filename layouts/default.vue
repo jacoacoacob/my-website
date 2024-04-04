@@ -1,27 +1,31 @@
 <script setup lang="ts">
 import type { MeContent } from "~/content-types";
 
+const featureBug = useFeatureBugV2();
 
-const {
-  canvas,
-  animate,
-  stopAnimation,
-  setup: setupFeatureBug,
-  teardown: teardownFeatureBug,
-} = useFeatureBug();
+const canvas = ref<HTMLCanvasElement>();
+// const {
+//   canvas,
+//   animate,
+//   stopAnimation,
+//   setup: setupFeatureBug,
+//   teardown: teardownFeatureBug,
+// } = useFeatureBug();
 
 const disableFeatureBug = true;
 
 onMounted(() => {
   if (!disableFeatureBug) {
-    setupFeatureBug();
-    animate();
+    featureBug.setup(canvas.value!);
+    featureBug.animate();
+    // setupFeatureBug();
+    // animate();
   }
 });
 
 onBeforeUnmount(() => {
   if (!disableFeatureBug) {
-    teardownFeatureBug();
+    // teardownFeatureBug();
   }
 });
 </script>
