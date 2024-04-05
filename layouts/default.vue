@@ -25,6 +25,7 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   if (!disableFeatureBug) {
+    featureBug.teardown();
     // teardownFeatureBug();
   }
 });

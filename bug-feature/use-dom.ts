@@ -34,6 +34,7 @@ function useDom(): UsefulStuff {
   function setup(canvas: HTMLCanvasElement) {
     ctx.value = canvas.getContext("2d")!;
 
+    
     console.log("setup ctx", ctx);
     onResize();
 
