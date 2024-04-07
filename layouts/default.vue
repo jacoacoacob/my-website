@@ -12,7 +12,7 @@ const canvas = ref<HTMLCanvasElement>();
 //   teardown: teardownFeatureBug,
 // } = useFeatureBug();
 
-const disableFeatureBug = false;
+const disableFeatureBug = true;
 
 onMounted(() => {
   if (!disableFeatureBug) {
