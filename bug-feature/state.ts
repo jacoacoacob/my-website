@@ -1,15 +1,59 @@
 
-interface State<Name, Data> {
+interface State<Name, Data = {}> {
   name: Name;
   data: Data;
 }
 
-interface StateMachine<States extends State<string, any>> {
+type Transition<
+  Entity,
+  States extends State<string, any>,
+  Data
+> = {
+  data: Data;
+  handleInput: (input: string) => States["name"] | undefined | void;
+  update: (
+    delta: number,
+    data: Data,
+    ctx: CanvasRenderingContext2D,
+    entity: Entity,
+  ) => States["name"] | undefined | void;
+}
+
+interface StateMachineOptions<Entity, States extends State<string, any>> {
   current: States["name"];
   transitions: {
-    [S in States as S["name"]]: {
-      data: S["data"];
-      update: (delta: number, data: S["data"], ctx: CanvasRenderingContext2D) => States["name"] | undefined;
+    [S in States as S["name"]]: Transition<Entity, States, S["data"]>
+  }
+}
+
+function createStateMachine<Entity, States extends State<string, any>>(
+  options: StateMachineOptions<Entity, States>
+) {
+  let transition = options.transitions[options.current] as Transition<Entity, States, any>;
+  let newState: ReturnType<typeof transition.update>;
+
+  function _setState(state: States["name"]) {
+    options.current = state;
+    transition = options.transitions[state] as Transition<Entity, States, any>;
+  }
+
+  return {
+    handleInput(input: string) {
+      const newState = transition.handleInput(input);
+      if (newState) {
+        _setState(newState);
+      }
+    },
+    update(delta: number, ctx: CanvasRenderingContext2D, entity: Entity) {
+      newState = transition.update(
+        delta,
+        transition.data,
+        ctx,
+        entity,
+      );
+      if (newState) {
+        _setState(newState);
+      }
     }
   }
 }
@@ -18,13 +62,16 @@ type Green = State<"green", { time: number; MAX_TIME: number }>;
 type Yellow = State<"yellow", { time: number; MAX_TIME: number }>;
 type Red = State<"red", { time: number; MAX_TIME: number }>;
 
-const trafficLight: StateMachine<Green | Yellow | Red> = {
+const trafficLight = createStateMachine<{}, Green | Yellow | Red>({
   current: "green",
   transitions: {
     green: {
       data: {
         time: 0,
-        MAX_TIME: 5000,
+        MAX_TIME: 3000,
+      },
+      handleInput(input) {
+        return "green"
       },
       update(delta, data, ctx) {
         data.time += delta;
@@ -49,6 +96,9 @@ const trafficLight: StateMachine<Green | Yellow | Red> = {
         time: 0,
         MAX_TIME: 3000,
       },
+      handleInput(input) {
+        return "green";
+      },
       update(delta, data, ctx) {
         data.time += delta;
         ctx.fillStyle = "yellow";
@@ -70,7 +120,10 @@ const trafficLight: StateMachine<Green | Yellow | Red> = {
     red: {
       data: {
         time: 0,
-        MAX_TIME: 6000,
+        MAX_TIME: 2000,
+      },
+      handleInput(input) {
+        return "green";
       },
       update(delta, data, ctx) {
         data.time += delta;
@@ -91,321 +144,8 @@ const trafficLight: StateMachine<Green | Yellow | Red> = {
       },
     }
   },
-};
+})
 
-export { trafficLight };
 
-
-
-
-
-
-// interface Transition<Name extends string, Data> {
-//   name: Name;
-//   data: Data;
-//   update: (delta: number) => Name | void;
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// interface Transition<Name extends string, Data> {
-//   name: Name;
-//   data: Data;
-//   update: (delta: number) => Name | void;
-// }
-
-// type Transitions<T extends Transition<string, any>> = {
-//   [Key in T["name"]]: T;
-// }
-
-// type StateMachine<T extends Transition<string, any>> = {
-//   current: T["name"];
-//   transitions: {
-//     [Key in T["name"]]: T;
-//   }
-// }
-
-// type Green = Transition<"green", { chargeTime: number }>;
-// type Blue = Transition<"blue", { chargeTime: number; name: string }>;
-
-// const s: StateMachine<Green | Blue> = {
-//   current: "blue",
-//   transitions: {
-//     blue: {
-//       name: "blue",
-//       data: {
-//         name: "",
-//         chargeTime: 2,
-//       },
-//       update(delta) {
-//         return "green";
-//       }
-//     },
-//     green: {
-//       name: "green",
-//       data: {
-//         chargeTime: 2,
-//       },
-//       update(delta) {
-
-//       }
-//     }
-//   }
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// type StateMachine<S extends State<string, any>> = {
-//   current: S["name"];
-//   transitions: {
-//     [Key in S["name"]]: {
-//       data: S[Key]
-//     }
-//   }
-// }
-
-// const h: StateMachine<Green | Blue> = {
-//   current: "green",
-//   transitions: {
-//     blue: {
-//       data: {
-        
-//       },
-//       update(delta) {
-
-//       }
-//     }
-//   }
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-////////////////////////
-// interface TransitionUpdateParams<Data> {
-//   ctx: CanvasRenderingContext2D;
-//   delta: number;
-//   data: Data;
-// }
-  
-// interface Transition<S, Data> {
-//   data: Data
-//   update: (params: TransitionUpdateParams<Data>) => S | void;
-// }
-
-// type Transitions<State extends string, Data> = {
-//   [Key in State]: Transition<State, Data>
-// }
-
-// type StateMachine<State extends string, Data> = {
-//   currentState: State;
-//   transitions: Transitions<State, Data>
-// };
-
-
-// interface StateTransition<Name, Data> {
-//   name: Name;
-//   data: Data;
-//   update: (params: TransitionUpdateParams<Data>) => Name | void
-// }
-
-// function createStateMachine<
-//   Data,
-//   Name extends keyof Transitions,
-//   Transitions extends Record<string, StateTransition<string, Data>>,
-// >(
-//   transitions: Transitions
-// ) {
-//   return transitions;
-// }
-
-// const s = createStateMachine({
-//   blue: {
-//     name: "blue",
-//     data: {
-//       count: 0,
-//     },
-//     update(params) {
-//       params.data
-//       return  ""
-//     }
-//   }
-// });
-////////////////////////
-
-
-
-
-
-// function createStateMachine<
-//   Data,
-//   State extends string,
-// >(
-//   initialState: State,
-//   transitions: Transitions<State, Data>
-// ): StateMachine<State, Data> {
-//   return {
-//     currentState: initialState,
-//     transitions
-//   }
-// }
-
-
-// const colorState = createStateMachine<any, "blue" | "green">("blue", {
-//   blue: {
-//     data: {
-//       hi: 9,
-//     },
-//     update() {
-      
-//     }
-//   },
-//   green: {
-//     data: {
-//       name: "sd",
-//     },
-//     update(params) {
-//       params.data.
-//     }
-//   }
-// })
-
-
-// const colorState: StateMachine<"blue" | "green"> = {
-//   currentState: "blue",
-//   transitions: {
-//     blue: {
-//       data: {
-//         name: "sdlkj"
-//       },
-//       update({ data, delta, ctx }) {
-
-//       }
-//     },
-//     green: {
-//       data: {
-//         chargeTime: 0,
-//       },
-//       update({ delta, data, ctx }) {
-
-//         return "blue";
-//       },
-//     }
-//   }
-// }
-
-
-// function hi<S extends string, D>(d: StateMachine<S, D>) {
-//   return d;
-// }
-
-// const sd = hi({
-//   currentState: "blue",
-//   transitions: {
-//     blue: {
-//       data: null,
-//       update() {
-        
-//       }
-//     },
-//     green: {
-//       data: {},
-//       update() {
-        
-//       }
-//     }
-//   }
-// })
-
-// sd.blue
+export { trafficLight, createStateMachine };
+export type { State, StateMachineOptions };

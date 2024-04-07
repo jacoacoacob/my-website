@@ -12,11 +12,7 @@ function useFeatureBugV2() {
   function animate() {
     const delta = clock.tick();
     ctx.value?.clearRect(0, 0, ctx.value.canvas.width, ctx.value.canvas.height);
-    const transition = trafficLight.transitions[trafficLight.current];
-    const newState = transition.update(delta, transition.data, ctx.value!);
-    if (newState) {
-      trafficLight.current = newState;
-    }
+    trafficLight.update(delta, ctx.value!, {});
     animationHandle = window.requestAnimationFrame(animate);
   }
 
